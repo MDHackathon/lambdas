@@ -20,9 +20,9 @@ end
 
 class Handler
     def run(req)
-        bucket_name = "tada"
-        # bucket_name = "plex-fifou"
-        regex = Regexp.new req.strip
+        req = req.split("\n")
+        bucket_name = req[0]
+        regex = Regexp.new req[1].strip
 
         ret = []
         for key in list_bucket_objects(bucket_name)
