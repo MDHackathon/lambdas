@@ -1,0 +1,18 @@
+before_install:
+  - curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+  - sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+  - sudo apt-get update
+  - sudo apt-get -y install docker-ce
+
+install:
+  - git submodule update --init --remote --recursive
+
+script:
+  - cd scraper-website && docker build -t scraper-website . # add other lambdas like this for the moment 
+  - cd fetchandstoreins3 && docker build -t fetchandstoreins3 . # add other lambdas like this for the moment 
+
+deploy:
+  provider: script
+  script: bash docker_push
+  on:
+    branch: master
