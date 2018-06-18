@@ -6,4 +6,4 @@ functions:
   scraper-webpage:
     lang: go
     handler: ./scraper-webpage
-    image: scraper-webpage
+    image: mdhackathon/scraper-webpage
